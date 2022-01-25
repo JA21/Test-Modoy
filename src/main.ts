@@ -4,6 +4,7 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 
 
 import { AppModule } from './app.module';
+import { setUpSwagger } from './swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -12,22 +13,21 @@ async function bootstrap() {
   });
 
   await app.init();
-
-   const config = app.get(ConfigService); 
-  
+  const config = app.get(ConfigService);
   app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
-  await app.listen(config.get<number>('app.port'), () => {
+  setUpSwagger(app);
+  await app.listen(config.get<number>('APP_PORT'), () => {
     Logger.log(
-      `🔥  App Name : ${config.get<string>('app.name')} 🔥`,
+      `🔥  App Name : ${config.get<string>('APP_NAME')} 🔥`,
       'Logger-App-Name',
     );
     Logger.log(
-      `🎓  Mode : ${config.get<string>('app.env')} 🎓`,
+      `🎓  Mode : ${config.get<string>('NODE_ENV')} 🎓`,
       'Logger-App-Mode',
     );
     Logger.log(
-      `🚀  Server Running on ${config.get<string>('app.host')}:${config.get<number>('app.port')} 🚀 `,
+      `🚀  Server Running on ${config.get<string>('APP_HOST')}:${config.get<number>('APP_PORT')} 🚀 `,
       'Logger-Server-Running',
     );
   });

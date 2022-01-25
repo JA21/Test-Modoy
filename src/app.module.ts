@@ -1,10 +1,10 @@
 import { Module} from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-
+import { HttpModule } from '@nestjs/axios'
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-import appConfig from './modules/@common/app.config';
+import {PokedexModule} from './modules/pokedex/pokedex.module';
 
 
 @Module({
@@ -12,11 +12,9 @@ import appConfig from './modules/@common/app.config';
     ConfigModule.forRoot({
       isGlobal: true,
       cache:true,
-      expandVariables: true,
-      load: [appConfig],
-   
+      expandVariables: true, 
     }),
-  
+  PokedexModule
   ],
   controllers: [AppController],
   providers: [

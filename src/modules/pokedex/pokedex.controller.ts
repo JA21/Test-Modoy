@@ -6,9 +6,11 @@ export class PokedexController {
   
   constructor(private readonly pokedexService:PokedexService){}
   
-  @Get()
+  @Get('/')
   async getPokemonInfoBasic(){
-    return "message";
+      const response= await this.pokedexService.allBasePokedex();
+      return await response;
+    
   }
 
   @Get()
