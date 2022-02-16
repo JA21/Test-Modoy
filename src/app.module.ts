@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { HttpModule } from '@nestjs/axios'
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import  appConfig  from './modules/@common/app.config';
 
 import {PokedexModule} from './modules/pokedex/pokedex.module';
 
@@ -13,6 +14,8 @@ import {PokedexModule} from './modules/pokedex/pokedex.module';
       isGlobal: true,
       cache:true,
       expandVariables: true, 
+      envFilePath:'.env',
+      load:[appConfig],
     }),
   PokedexModule
   ],

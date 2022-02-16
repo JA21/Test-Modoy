@@ -7,6 +7,7 @@ import { AppModule } from './app.module';
 import { setUpSwagger } from './swagger';
 
 async function bootstrap() {
+  
   const app = await NestFactory.create(AppModule, {
     cors: true,
     bodyParser: true,
@@ -17,7 +18,7 @@ async function bootstrap() {
   app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
   setUpSwagger(app);
-  await app.listen(config.get<number>('APP_PORT'), () => {
+  await app.listen(process.env.APP_PORT, () => {
     Logger.log(
       `🔥  App Name : ${config.get<string>('APP_NAME')} 🔥`,
       'Logger-App-Name',
