@@ -13,13 +13,13 @@ async function bootstrap() {
     bodyParser: true,
   });
 
-  await app.init();
+  //await app.init();
   const config = app.get(ConfigService);
   app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
   setUpSwagger(app);
   console.log(process.env);
-  await app.listen(process.env.APP_PORT, () => {
+  await app.listen(process.env.PORT, () => {
     Logger.log(
       `🔥  App Name : ${config.get<string>('APP_NAME')} 🔥`,
       'Logger-App-Name',
